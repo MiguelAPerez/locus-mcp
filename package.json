@@ -1,5 +1,8 @@
 {
-  "name": "locus-mcp",
+  "name": "@miguelaperez/locus-mcp",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "0.1.1",
   "description": "MCP server for Locus — semantic dataspace manager",
   "type": "module",
