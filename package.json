@@ -4,7 +4,7 @@
   "description": "MCP server for Locus — semantic dataspace manager",
   "type": "module",
   "bin": {
-    "locus-mcp": "./dist/index.js"
+    "locus-mcp": "dist/index.js"
   },
   "files": [
     "dist"
