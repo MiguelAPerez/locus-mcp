@@ -15,11 +15,13 @@ Exposes all Locus HTTP endpoints as MCP tools so any MCP-compatible client (Clau
 npm install -g @miguelaperez/locus-mcp --registry=https://npm.pkg.github.com
 ```
 
-Or run directly with npx:
+Or run directly with npx (package is on GitHub, not the npm registry):
 
 ```bash
-npx @miguelaperez/locus-mcp
+npx github:MiguelAPerez/locus-mcp
 ```
+
+> **Note:** `@miguelaperez/locus-mcp` is a GitHub Packages package, not published to the public npm registry. Using `npx @miguelaperez/locus-mcp` (without `github:`) will fail unless you've configured your npm registry. Use `github:MiguelAPerez/locus-mcp` instead.
 
 ## Configuration
 
@@ -38,7 +40,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "locus": {
       "command": "npx",
-      "args": ["-y", "@miguelaperez/locus-mcp"],
+      "args": ["-y", "github:MiguelAPerez/locus-mcp"],
       "env": {
         "LOCUS_URL": "http://localhost:8000"
       }
@@ -53,9 +55,25 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 {
   "locus": {
     "command": "npx",
-    "args": ["-y", "@miguelaperez/locus-mcp"],
+    "args": ["-y", "github:MiguelAPerez/locus-mcp"],
     "env": {
       "LOCUS_URL": "http://localhost:8000"
+    }
+  }
+}
+```
+
+### mcpo (HTTP proxy)
+
+```json
+{
+  "mcpServers": {
+    "locus": {
+      "command": "npx",
+      "args": ["-y", "github:MiguelAPerez/locus-mcp"],
+      "env": {
+        "LOCUS_URL": "http://locus:8000"
+      }
     }
   }
 }
