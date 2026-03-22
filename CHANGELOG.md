@@ -1,3 +1,9 @@
+## v0.3.0 (2026-03-22)
+
+### Feat
+
+- support file_path in ingest_document and fix redirect handling
+
 ## v0.2.0 (2026-03-22)
 
 ### Feat
