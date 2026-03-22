@@ -3,6 +3,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createServer } from "node:http";
+import { readFileSync } from "node:fs";
+import { basename } from "node:path";
 import { z } from "zod";
 import { locus } from "./locus.js";
 
@@ -67,19 +69,29 @@ function createLocusServer(): McpServer {
   server.registerTool(
     "ingest_document",
     {
-      description: "Ingest a text document into a Locus dataspace",
+      description: "Ingest a document into a Locus dataspace. Provide either file_path (preferred, reads file locally without loading content into context) or text.",
       inputSchema: {
         space: z.string().describe("Name of the dataspace"),
-        text: z.string().describe("Text content to ingest"),
-        filename: z.string().optional().describe("Optional filename label for the document"),
+        file_path: z.string().optional().describe("Absolute path to a local file to ingest (preferred — avoids loading content into context)"),
+        text: z.string().optional().describe("Text content to ingest (use file_path instead when possible)"),
+        filename: z.string().optional().describe("Filename label (defaults to basename of file_path if provided)"),
       },
     },
-    async ({ space, text, filename }) => {
-      const body: Record<string, string> = { text };
-      if (filename) body.filename = filename;
+    async ({ space, file_path, text, filename }) => {
+      const form = new FormData();
+      if (file_path) {
+        const content = readFileSync(file_path);
+        const name = filename ?? basename(file_path);
+        form.append("file", new Blob([content]), name);
+      } else if (text) {
+        form.append("text", text);
+        if (filename) form.append("filename", filename);
+      } else {
+        throw new Error("Provide either file_path or text");
+      }
       const data = await locus(`/spaces/${encodeURIComponent(space)}/documents`, {
         method: "POST",
-        body: JSON.stringify(body),
+        body: form,
       });
       return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
     }
