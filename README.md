@@ -12,13 +12,13 @@ Exposes all Locus HTTP endpoints as MCP tools so any MCP-compatible client (Clau
 ## Installation
 
 ```bash
-npm install -g locus-mcp
+npm install -g @miguelaperez/locus-mcp --registry=https://npm.pkg.github.com
 ```
 
 Or run directly with npx:
 
 ```bash
-npx locus-mcp
+npx @miguelaperez/locus-mcp
 ```
 
 ## Configuration
@@ -38,7 +38,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "locus": {
       "command": "npx",
-      "args": ["-y", "locus-mcp"],
+      "args": ["-y", "@miguelaperez/locus-mcp"],
       "env": {
         "LOCUS_URL": "http://localhost:8000"
       }
@@ -53,7 +53,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 {
   "locus": {
     "command": "npx",
-    "args": ["-y", "locus-mcp"],
+    "args": ["-y", "@miguelaperez/locus-mcp"],
     "env": {
       "LOCUS_URL": "http://localhost:8000"
     }
