@@ -1,12 +1,12 @@
 # locus-mcp
 
-MCP server for [Locus](https://github.com/miguelperez/locus) — a local semantic dataspace manager powered by Ollama.
+MCP server for [Locus](https://github.com/miguelaperez/locus) — a local semantic dataspace manager powered by Ollama.
 
 Exposes all Locus HTTP endpoints as MCP tools so any MCP-compatible client (Claude Desktop, Cursor, etc.) can manage dataspaces, ingest documents, and run semantic search.
 
 ## Requirements
 
-- [Locus](https://github.com/miguelperez/locus) running locally or remotely
+- [Locus](https://github.com/miguelaperez/locus) running locally or remotely
 - Node.js 18+
 
 ## Installation
